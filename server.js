@@ -3,8 +3,8 @@ var ws = require('websocket').server;
 
 var https = require('https');
 var fs = require('fs');
-var privateKey = fs.readFileSync('/home/ubuntu/websocket_server/pem/cakey.pem', 'utf8');
-var certificate = fs.readFileSync('/home/ubuntu/websocket_server/pem/cacert.pem', 'utf8');
+var privateKey = fs.readFileSync('cakey.pem', 'utf8');
+var certificate = fs.readFileSync('cacert.pem', 'utf8');
 var credentials = { key: privateKey, cert: certificate, rejectUnauthorized: false };
 
 var http = require('http');
@@ -20,23 +20,14 @@ var uuidMax = 100;
 var CKTWebService = {
   key:              "66b78883f3fb4f2db31dc42fb7031e2b",
   host:             "service1.insyde.com",
-  setTargetStatus:  "/CastKT/Service/CastKT.asmx/setTargetStatus",
-  setTargetStatusWithMeetingInfo: "/CastKT/Service/CastKT.asmx/setTargetStatusWithMeetingInfo",
+  setTargetStatus:  "http://service1.insyde.com/CastKT/Service/CastKT.asmx/setTargetStatus",
+  setTargetStatusWithMeetingInfo: "http://service1.insyde.com/CastKT/Service/CastKT.asmx/setTargetStatusWithMeetingInfo",
 }
 var ToDWebService = {
   key:              "d8878a53616f4550b5c131185f398721",
   host:             "service1.insyde.com",
-  setTargetStatus:  "/TodKanTan/Service/Tod.asmx/setTargetStatus",
+  setTargetStatus:  "http://service1.insyde.com/TodKanTan/Service/Tod.asmx/setTargetStatus",
 }
-
-var server = http.createServer(function (request, response) {
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
-    response.write('Hello World (ws) ' + getTime());
-	response.end();
-	});
-server.listen(8080, function(){
-  console.log(getTime() + ' Server is listening on port 8080');
-});
 
 
 var httpsServer = https.createServer(credentials, function (request, response) {
@@ -44,8 +35,8 @@ var httpsServer = https.createServer(credentials, function (request, response) {
     response.write('Hello World (wss) ' + getTime());
 	response.end();
 });
-httpsServer.listen(8181, function(){
-    console.log(getTime() + ' Server is listening on port 8181');
+httpsServer.listen(443, function(){
+    console.log(getTime() + ' Server is listening on port 443');
 });
 
 function PostCode(obj, host, path) {

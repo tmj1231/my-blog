@@ -34,8 +34,8 @@ var server = http.createServer(function (request, response) {
     response.write('Hello World (ws) ' + getTime());
 	response.end();
 	});
-server.listen(443, function(){
-  console.log(getTime() + ' Server is listening on port 443');
+server.listen(8080, function(){
+  console.log(getTime() + ' Server is listening on port 8080');
 });
 
 
@@ -44,8 +44,8 @@ var httpsServer = https.createServer(credentials, function (request, response) {
     response.write('Hello World (wss) ' + getTime());
 	response.end();
 });
-httpsServer.listen(443, function(){
-    console.log(getTime() + ' Server is listening on port 443');
+httpsServer.listen(8181, function(){
+    console.log(getTime() + ' Server is listening on port 8181');
 });
 
 function PostCode(obj, host, path) {

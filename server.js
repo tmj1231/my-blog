@@ -29,6 +29,15 @@ var ToDWebService = {
   setTargetStatus:  "http://service1.insyde.com/TodKanTan/Service/Tod.asmx/setTargetStatus",
 }
 
+var server = http.createServer(function (request, response) {
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.write('Hello World (ws) ' + getTime());
+	response.end();
+	});
+server.listen(443, function(){
+  console.log(getTime() + ' Server is listening on port 443');
+});
+
 
 var httpsServer = https.createServer(credentials, function (request, response) {
     response.writeHead(200, { 'Content-Type': 'text/plain' });
